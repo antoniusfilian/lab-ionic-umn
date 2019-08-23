@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="https://unpkg.com/@ionic/core@latest/dist/ionic.js"></script>
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="https://unpkg.com/@ionic/core@latest/css/ionic.bundle.css" rel="stylesheet">
+    <title>Budget Planner</title>
+    <script>
+      function documentFinish(){
+        var totalPengeluaran = 0
+        document.getElementById("totalPengeluaran").innerHTML = totalPengeluaran;
+        document.getElementById('btnTambah').onclick = function(){
+          if(document.getElementById("inputNama").value == "" || 
+          document.getElementById("inputJumlah").value == ""){
+            const controller = document.querySelector('ion-alert-controller');
+            controller.create({
+              header: 'Terjadi Kesalahan',
+              message: 'Mohon masukkan nama dan jumlah pengeluaran.',
+              buttons: ['Tutup']
+            }).then(alert => {
+              alert.present();
+            });
+          }
+          else{
+            var ionItem = document.createElement("ion-item")
+            var inputNama = document.getElementById("inputNama").value;
+            var inputJumlah = document.getElementById("inputJumlah").value;
+            var jumlah = parseInt(inputJumlah)
+            var line = inputNama + " : Rp. " +  inputJumlah + ",00"
+            var createText = document.createTextNode(line)
+            ionItem.appendChild(createText)
+            document.getElementById("listPengeluaran").appendChild(ionItem)
+            document.getElementById("inputNama").value = ""
+            document.getElementById("inputJumlah").value = ""
+
+            totalPengeluaran = totalPengeluaran + jumlah
+            
+            document.getElementById("totalPengeluaran").innerHTML = totalPengeluaran + ",00"
+          }
+        }
+        document.getElementById('btnHapus').onclick = function(){
+          document.getElementById("inputNama").value = ""
+          document.getElementById("inputJumlah").value = ""
+        }
+      }
+    </script>
+    
+  </head>
+  <body onload="documentFinish()">
+    <ion-app>
+      <ion-header>
+          <ion-toolbar color="primary" >
+            <ion-title text-center>Budget Planner</ion-title>
+          </ion-toolbar>
+        </ion-header>
+      <ion-content>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <b>Input Pengeluaran</b>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content >
+            &nbsp;
+            <ion-item-divider>
+              <ion-input placeholder="Nama Pengeluaran" id="inputNama"></ion-input>
+            </ion-item-divider>
+            <ion-item-divider>
+              <ion-input placeholder="Jumlah Pengeluaran" id="inputJumlah"></ion-input>
+            </ion-item-divider>
+            <ion-item>
+              <ion-button fill="outline" color="danger" slot="end" id="btnHapus">
+                <ion-icon name="close" size="small"></ion-icon>
+                Hapus
+              </ion-button>
+              <ion-alert-controller></ion-alert-controller>
+              <ion-button color="primary" slot="end" id="btnTambah">
+                <ion-icon name="add" size="small"></ion-icon>
+                Tambah
+              </ion-button>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-card-content>
+          <ion-list id="listPengeluaran">
+          </ion-list>
+          <br>
+          Total Pengeluaran : Rp. 
+          <ion-text>
+            <h8 id="totalPengeluaran">
+
+            </h8>
+          </ion-text>
+        </ion-card-content>
+      </ion-content>
+    </ion-app>
+  </body>
+</html>

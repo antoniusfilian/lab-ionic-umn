@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ selectedPlace.title }}
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <br>
+      <ion-img [src]="selectedPlace.imageUrl"></ion-img>
+      <ion-card-content class="ion-text-center">
+        <h4>
+          {{selectedPlace.description}}
+        </h4>
+        <h4>
+          {{selectedPlace.price}}
+        </h4>
+        <br>
+        Are you sure want to book?
+        <ion-button expand="full" shape="round" color="primary" margin (click)="bookPlace()">Book</ion-button>
+        <ion-button expand="full" fill="outline" shape="round" color="danger" margin (click)="onCancel()">Cancel</ion-button>
+      </ion-card-content>
+    </ion-col>
+  </ion-row>
+</ion-content>

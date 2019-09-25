@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Your Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col size-md="6" offset-md="3">
+        <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1">
+        <h2>
+          Antonius Filian
+        </h2>
+        <p>
+          00000013047
+        </p>
+        <br>
+        <h3>
+          My UKMS
+        </h3>
+        <ion-list>
+          <ion-item-sliding *ngFor="let myUKM of myUkms" #slidingUKM>
+            <ion-item>
+              <ion-label>
+                <h2>
+                  {{ myUKM.name }}
+                </h2>
+              </ion-label>
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="onCancelMyUkm(myUKM.id)">
+                <ion-icon name="trash" slot="icon-only">
+                </ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

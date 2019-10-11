@@ -1,0 +1,33 @@
+<ion-header>
+  <p class="ion-text-center">Available Venue Nearby</p>
+</ion-header>
+<ion-content>
+  <ion-row
+    *ngFor="let place of loadedCourts">
+    <ion-col size="12" size-sm="8" offset-sm="2" class="text-center">
+      <ion-card>
+        <ion-img [src]="place.imageUrl"></ion-img>
+        <ion-card-content>
+          <h5 style="color: black;">
+            {{ place.type}}
+          </h5>
+          <h2 style="color: black;">
+            <b>
+              {{ place.name }}
+            </b>
+          </h2>
+          <br>
+          <p class="ion-float-left">
+            <ion-icon name="pin"></ion-icon>
+            {{ place.city }}
+          </p>
+          <ion-button class="ion-float-right" fill="outline" color="primary" (click)="presentAlert(place)">
+            <p>
+              Book Now
+            </p>
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
